@@ -1,10 +1,10 @@
 import { FC, memo } from "react";
 import { Route, Switch } from "react-router-dom";
-import { Home } from "./components/pages/home";
-import { Login } from "./components/pages/login";
-import { Page404 } from "./components/pages/page_404";
-import { Setting } from "./components/pages/setting";
-import { UserManagement } from "./components/pages/user_management";
+import { Home } from "./pages/home";
+import { Login } from "./pages/login";
+import { Page404 } from "./pages/page_404";
+import { Setting } from "./pages/setting";
+import { UserManagement } from "./pages/user_management";
 
 export const Router: FC = memo(() => {
   return (
