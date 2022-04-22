@@ -1,5 +1,6 @@
 import { FC, memo } from "react";
 import { Route, Switch } from "react-router-dom";
+import { HeaderLayout } from "./components/common/header_layout";
 import { Home } from "./pages/home";
 import { Login } from "./pages/login";
 import { Page404 } from "./pages/page_404";
@@ -22,7 +23,7 @@ export const Router: FC = memo(() => {
                 const selfPath = match.url + route.path;
                 return (
                   <Route key={index} exact={route.exact} path={selfPath}>
-                    {route.children}
+                    <HeaderLayout>{route.children}</HeaderLayout>
                   </Route>
                 );
               })}
