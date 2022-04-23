@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Box, Flex, Heading, Link, useDisclosure } from "@chakra-ui/react";
 import { FC, memo, useCallback } from "react";
 import { useHistory } from "react-router-dom";
