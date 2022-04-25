@@ -3,11 +3,13 @@ import axios from "axios";
 import { useCallback, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { User } from "../types/user";
+import { useLoginUser } from "./useLoginUser";
 import { useMessage } from "./useMessage";
 
 export const useAuth = () => {
   const navigate = useHistory();
   const { showMessage } = useMessage();
+  const { setLoginUser } = useLoginUser();
   const [loading, setLoading] = useState(false);
 
   const login = useCallback((id: string) => {
@@ -17,6 +19,7 @@ export const useAuth = () => {
       .get<User>(`https://jsonplaceholder.typicode.com/users/${id}`)
       .then((response) => {
         if (response.data) {
+          setLoginUser(response.data);
           showMessage({ title: "ログインしました", status: "success" });
           navigate.push("/home");
         } else {

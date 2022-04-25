@@ -6,31 +6,34 @@ import { Login } from "./pages/login";
 import { Page404 } from "./pages/page_404";
 import { Setting } from "./pages/setting";
 import { UserManagement } from "./pages/user_management";
+import { LoginUserProvider } from "./providers/login_user_provider";
 
 export const Router: FC = memo(() => {
   return (
     <Switch>
-      <Route exact path="/">
-        <Login />
-      </Route>
-      <Route
-        path="/home"
-        render={(props) => {
-          const { match } = props;
-          return (
-            <Switch>
-              {homeRoutes.map((route, index) => {
-                const selfPath = match.url + route.path;
-                return (
-                  <Route key={index} exact={route.exact} path={selfPath}>
-                    <HeaderLayout>{route.children}</HeaderLayout>
-                  </Route>
-                );
-              })}
-            </Switch>
-          );
-        }}
-      />
+      <LoginUserProvider>
+        <Route exact path="/">
+          <Login />
+        </Route>
+        <Route
+          path="/home"
+          render={(props) => {
+            const { match } = props;
+            return (
+              <Switch>
+                {homeRoutes.map((route, index) => {
+                  const selfPath = match.url + route.path;
+                  return (
+                    <Route key={index} exact={route.exact} path={selfPath}>
+                      <HeaderLayout>{route.children}</HeaderLayout>
+                    </Route>
+                  );
+                })}
+              </Switch>
+            );
+          }}
+        />
+      </LoginUserProvider>
       <Route path="*">
         <Page404 />
       </Route>
