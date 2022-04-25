@@ -6,12 +6,12 @@ import { Login } from "./pages/login";
 import { Page404 } from "./pages/page_404";
 import { Setting } from "./pages/setting";
 import { UserManagement } from "./pages/user_management";
-import { LoginUserProvider } from "./providers/login_user_provider";
+import { RecoilRoot } from "recoil";
 
 export const Router: FC = memo(() => {
   return (
     <Switch>
-      <LoginUserProvider>
+      <RecoilRoot>
         <Route exact path="/">
           <Login />
         </Route>
@@ -33,7 +33,7 @@ export const Router: FC = memo(() => {
             );
           }}
         />
-      </LoginUserProvider>
+      </RecoilRoot>
       <Route path="*">
         <Page404 />
       </Route>

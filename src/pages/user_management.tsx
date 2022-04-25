@@ -4,14 +4,15 @@ import { FC, memo, useCallback, useEffect } from "react";
 import { UserCard } from "../components/user_management/user_card";
 import { UserDetailModal } from "../components/user_management/user_detail_modal";
 import { useAllUsers } from "../hooks/useAllUsers";
-import { useLoginUser } from "../hooks/useLoginUser";
+import { useRecoilValue } from "recoil";
 import { useSelectUser } from "../hooks/useSelectUser";
+import { authState } from "../store/auth_state";
 
 export const UserManagement: FC = memo(() => {
   const { getUsers, users, loading } = useAllUsers();
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { selectUser, onSelectUser } = useSelectUser();
-  const { loginUser } = useLoginUser();
+  const loginUser = useRecoilValue(authState);
 
   useEffect(() => getUsers(), []);
 

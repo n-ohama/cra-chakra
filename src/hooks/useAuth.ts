@@ -3,13 +3,14 @@ import axios from "axios";
 import { useCallback, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { User } from "../types/user";
-import { useLoginUser } from "./useLoginUser";
+import { useSetRecoilState } from "recoil";
 import { useMessage } from "./useMessage";
+import { authState } from "../store/auth_state";
 
 export const useAuth = () => {
   const navigate = useHistory();
   const { showMessage } = useMessage();
-  const { setLoginUser } = useLoginUser();
+  const setLoginUser = useSetRecoilState(authState);
   const [loading, setLoading] = useState(false);
 
   const login = useCallback((id: string) => {
