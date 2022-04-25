@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Center, Spinner, useDisclosure, Wrap } from "@chakra-ui/react";
 import { FC, memo, useCallback, useEffect } from "react";
 import { UserCard } from "../components/user_management/user_card";
@@ -11,7 +12,6 @@ export const UserManagement: FC = memo(() => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { selectUser, onSelectUser } = useSelectUser();
   const { loginUser } = useLoginUser();
-  console.log("loginUser", loginUser);
 
   useEffect(() => getUsers(), []);
 
@@ -39,7 +39,12 @@ export const UserManagement: FC = memo(() => {
           ))}
         </Wrap>
       )}
-      <UserDetailModal isOpen={isOpen} onClose={onClose} user={selectUser} />
+      <UserDetailModal
+        isOpen={isOpen}
+        onClose={onClose}
+        user={selectUser}
+        isAdmin={loginUser?.isAdmin}
+      />
     </>
   );
 });
