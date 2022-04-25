@@ -5,7 +5,7 @@ import { PrimaryButton } from "../components/common/primary_button";
 import { useAuth } from "../hooks/useAuth";
 
 export const Login: FC = memo(() => {
-  const { login, isLoading } = useAuth();
+  const { login, loading } = useAuth();
   const [userId, setUserId] = useState("");
   const onChangeText = (event: ChangeEvent<HTMLInputElement>) =>
     setUserId(event.target.value);
@@ -27,7 +27,7 @@ export const Login: FC = memo(() => {
           />
           <PrimaryButton
             isDisabled={userId === ""}
-            isLoading={isLoading}
+            isLoading={loading}
             onClick={onClickLogin}
           >
             ログイン

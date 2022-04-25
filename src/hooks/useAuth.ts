@@ -8,10 +8,10 @@ import { useMessage } from "./useMessage";
 export const useAuth = () => {
   const navigate = useHistory();
   const { showMessage } = useMessage();
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const login = useCallback((id: string) => {
-    setIsLoading(true);
+    setLoading(true);
 
     axios
       .get<User>(`https://jsonplaceholder.typicode.com/users/${id}`)
@@ -26,8 +26,8 @@ export const useAuth = () => {
       .catch(() =>
         showMessage({ title: "ログインできません", status: "error" })
       )
-      .finally(() => setIsLoading(false));
+      .finally(() => setLoading(false));
   }, []);
 
-  return { login, isLoading };
+  return { login, loading };
 };
