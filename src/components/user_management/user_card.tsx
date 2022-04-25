@@ -10,7 +10,7 @@ type Props = {
 export const UserCard: FC<Props> = memo((props) => {
   const { imageUrl, userName, fullName } = props;
   return (
-    <WrapItem>
+    <WrapItem mx="auto">
       <Box
         w="260px"
         h="260px"
