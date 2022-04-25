@@ -1,17 +1,21 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Center, Spinner, useDisclosure, Wrap } from "@chakra-ui/react";
 import { FC, memo, useCallback, useEffect } from "react";
 import { UserCard } from "../components/user_management/user_card";
 import { UserDetailModal } from "../components/user_management/user_detail_modal";
 import { useAllUsers } from "../hooks/useAllUsers";
+import { useSelectUser } from "../hooks/useSelectUser";
 
 export const UserManagement: FC = memo(() => {
   const { getUsers, users, loading } = useAllUsers();
   const { isOpen, onClose, onOpen } = useDisclosure();
+  const { selectUser, onSelectUser } = useSelectUser();
 
   useEffect(() => getUsers(), []);
 
-  const onClickUser = useCallback(() => onOpen(), []);
+  const onClickUser = useCallback(
+    (id: number) => onSelectUser({ id, users, onOpen }),
+    [users]
+  );
   return (
     <>
       {loading ? (
@@ -22,6 +26,7 @@ export const UserManagement: FC = memo(() => {
         <Wrap p={{ base: 4, md: 10 }}>
           {users.map((item) => (
             <UserCard
+              id={item.id}
               key={item.id}
               imageUrl={`https://source.unsplash.com/random/${item.id}`}
               userName={item.username}
@@ -31,7 +36,7 @@ export const UserManagement: FC = memo(() => {
           ))}
         </Wrap>
       )}
-      <UserDetailModal isOpen={isOpen} onClose={onClose} />
+      <UserDetailModal isOpen={isOpen} onClose={onClose} user={selectUser} />
     </>
   );
 });
