@@ -7,12 +7,14 @@ import { useAllUsers } from "../hooks/useAllUsers";
 import { useRecoilValue } from "recoil";
 import { useSelectUser } from "../hooks/useSelectUser";
 import { authState } from "../store/auth_state";
+import { allUsersState } from "../store/all_users_state";
 
 export const UserManagement: FC = memo(() => {
-  const { getUsers, users, loading } = useAllUsers();
+  const { getUsers, loading } = useAllUsers();
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { selectUser, onSelectUser } = useSelectUser();
   const loginUser = useRecoilValue(authState);
+  const users = useRecoilValue(allUsersState);
 
   useEffect(() => getUsers(), []);
 
